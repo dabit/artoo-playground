@@ -1,6 +1,11 @@
 require 'artoo'
 require 'csv'
 
+#
+# Write the data from the Leap into a CSV file
+# to plot it with 3D graphing software.
+#
+
 FILE_NAME = 'data.txt'
 File.unlink FILE_NAME if File.exists? FILE_NAME
 
@@ -16,7 +21,18 @@ def on_frame(*args)
   pointables = frame.pointables
   gestures   = frame.gestures
 
+  #
+  # Ideally you only want to track one of these:
+  #
+
+  #
+  # Unconmment if you want to track finger movement
+  #
   track_pointables(pointables)
+
+  #
+  # Uncomment if you want to track gestures
+  #
   #track_gestures(gestures)
 end
 
