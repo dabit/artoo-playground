@@ -1,6 +1,9 @@
 require 'artoo'
 require 'csv'
 
+FILE_NAME = 'data.txt'
+File.unlink FILE_NAME if File.exists? FILE_NAME
+
 connection :leapmotion, :adaptor => :leapmotion, :port => '127.0.0.1:6437'
 device :leapmotion, :driver => :leapmotion
 
@@ -12,6 +15,7 @@ def on_frame(*args)
   frame = args[1]
   pointables = frame.pointables
   gestures = frame.gestures
+
   unless gestures.empty?
     gesture = gestures.first
     if gesture.is_a? Artoo::Drivers::Leapmotion::Gesture::Swipe
@@ -21,10 +25,9 @@ def on_frame(*args)
       end
     end
   end
-  if pointable = pointables.first
-    CSV.open 'data.txt', 'a' do |csv|
-      csv << pointable.stabilizedTipPosition
-    end
+
+  pointables.each do |pointable|
+    write_pointable_csv(pointable)
   end
 end
 
@@ -36,3 +39,8 @@ def debug(gesture)
   puts gesture.state.inspect
 end
 
+def write_pointable_csv(pointable)
+  CSV.open FILE_NAME, 'a+' do |csv|
+    csv << pointable.stabilizedTipPosition
+  end
+end
