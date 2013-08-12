@@ -29,6 +29,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.3.5)
     celluloid (0.14.1)
       timers (>= 1.0.0)
     celluloid-io (0.14.1)
@@ -36,6 +37,7 @@ GEM
       nio4r (>= 0.4.5)
     certified (0.1.1)
     coderay (1.0.9)
+    gnuplot (2.6.2)
     http (0.4.0)
       certified
       http_parser.rb
@@ -45,8 +47,10 @@ GEM
       websocket-driver
     hybridgroup-serialport (1.2.1)
     hybridgroup-sphero (1.4.0)
+    launchy (2.3.0)
+      addressable (~> 2.3)
     method_source (0.8.2)
-    multi_json (1.7.8)
+    multi_json (1.7.9)
     nio4r (0.5.0)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -75,5 +79,7 @@ DEPENDENCIES
   artoo!
   artoo-leapmotion!
   artoo-sphero!
+  gnuplot
   hybridgroup-serialport
   hybridgroup-sphero
+  launchy
